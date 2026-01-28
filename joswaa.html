@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Critical Alert</title>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            overflow: hidden; /* Prevents scrollbars during the prank */
+        }
+        #ui {
+            text-align: center;
+        }
+        #scare {
+            display: none;
+            /* Ensures image fills the entire screen and stays centered */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain; /* Keeps the whole image visible; use 'cover' to fill every inch */
+            z-index: 9999;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ui">
+        <h1>System Update Required</h1>
+        <p>Press OK to continue.</p>
+        <button id="okBtn">OK</button>
+    </div>
+
+    <img id="scare" src="https://i.ibb.co/nMWSXMqQ/b0c2b456-13f3-4976-8f36-d0ba94ef52d7.jpg" alt="Prank Image">
+
+    <audio id="scream" src="https://www.soundjay.com/human/sounds/shout-01.mp3"></audio>
+
+    <script>
+        const btn = document.getElementById('okBtn');
+        const ui = document.getElementById('ui');
+        const img = document.getElementById('scare');
+        const sound = document.getElementById('scream');
+
+        function trigger() {
+            ui.style.display = 'none';
+            img.style.display = 'block';
+            sound.play();
+            
+            // Attempt to go fullscreen for maximum effect
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        }
+
+        btn.onclick = trigger;
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Enter") {
+                trigger();
+            }
+        });
+    </script>
+</body>
+</html>
